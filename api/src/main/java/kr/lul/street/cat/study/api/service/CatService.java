@@ -23,7 +23,7 @@ public class CatService {
   private CatManagerService catManagerService;
   @Autowired
   private CatRepository repository;
-  
+
   public Cat add(UUID chipId, UUID deviceId) {
     if (log.isTraceEnabled())
       log.trace("#add args : chipId={}, deviceId={}", chipId, deviceId);
@@ -36,6 +36,8 @@ public class CatService {
       cat = this.repository.save(cat);
     }
 
+    if (log.isTraceEnabled())
+      log.trace("#add return : {}", cat);
     return cat;
   }
 }
