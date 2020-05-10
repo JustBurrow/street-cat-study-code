@@ -1,0 +1,67 @@
+buildscript {
+  repositories {
+    jcenter()
+    mavenCentral()
+    mavenLocal()
+  }
+
+  dependencies {
+    classpath 'org.springframework.boot:spring-boot-gradle-plugin:2.2.0.RELEASE'
+    classpath 'io.spring.gradle:dependency-management-plugin:1.0.8.RELEASE'
+  }
+}
+
+apply plugin: "idea"
+apply plugin: "eclipse"
+
+group = 'kr.lul.gitbook'
+version = '0.0.1-SNAPSHOT'
+
+subprojects {
+  apply plugin: "java"
+  apply plugin: "java-library"
+  apply plugin: "org.springframework.boot"
+  apply plugin: "io.spring.dependency-management"
+
+  sourceCompatibility = 11
+  targetCompatibility = 11
+
+  configurations {
+    developmentOnly
+    runtimeClasspath {
+      extendsFrom developmentOnly
+    }
+    compileOnly {
+      extendsFrom annotationProcessor
+    }
+  }
+
+  test {
+    useJUnitPlatform()
+  }
+
+  jar.enabled = true
+  bootJar.enabled = false
+
+  repositories {
+    mavenCentral()
+    jcenter()
+  }
+
+  dependencyManagement {
+    imports {
+      mavenBom org.springframework.boot.gradle.plugin.SpringBootPlugin.BOM_COORDINATES
+    }
+  }
+
+  dependencies {
+    developmentOnly 'org.springframework.boot:spring-boot-devtools'
+
+    annotationProcessor 'org.springframework.boot:spring-boot-configuration-processor'
+
+    testImplementation('org.springframework.boot:spring-boot-starter-test') {
+      exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
+    }
+    testImplementation 'junit:junit'
+  }
+}
