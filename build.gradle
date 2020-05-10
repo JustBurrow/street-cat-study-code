@@ -52,6 +52,10 @@ subprojects {
     imports {
       mavenBom org.springframework.boot.gradle.plugin.SpringBootPlugin.BOM_COORDINATES
     }
+
+    dependencies {
+      dependency 'commons-codec:commons-codec:1.14'
+    }
   }
 
   dependencies {
