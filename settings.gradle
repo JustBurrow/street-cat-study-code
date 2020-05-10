@@ -1,1 +1,3 @@
 rootProject.name = 'street-cat-study'
+
+include 'api'
