@@ -14,9 +14,9 @@ import java.nio.file.Files;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
+import java.util.UUID;
 
 import static java.lang.Integer.parseInt;
-import static java.util.UUID.fromString;
 import static java.util.stream.Collectors.toList;
 import static java.util.stream.StreamSupport.stream;
 import static org.slf4j.LoggerFactory.getLogger;
@@ -41,8 +41,8 @@ public class UseDataReader {
     try (BufferedReader reader = Files.newBufferedReader(file.toPath())) {
       return stream(this.format.parse(reader).spliterator(), false)
                  .map(record -> new UseData(
-                     fromString(record.get(0)),
-                     fromString(record.get(1)),
+                     UUID.fromString(record.get(0)),
+                     UUID.fromString(record.get(1)),
                      DeviceType.valueOf(parseInt(record.get(2))),
                      parseInt(record.get(3)),
                      LocalDateTime.parse(record.get(4), this.dateTimeFormatter)))

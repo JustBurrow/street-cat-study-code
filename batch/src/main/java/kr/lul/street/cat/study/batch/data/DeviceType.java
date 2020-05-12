@@ -10,7 +10,7 @@ public enum DeviceType {
   WEIGHT,
   TIME;
 
-  public static DeviceType valueOf(int index) {
-    return values()[index];
+  public static DeviceType valueOf(int ordinal) {
+    return values()[ordinal];
   }
 }
