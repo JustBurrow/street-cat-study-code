@@ -9,7 +9,8 @@ import java.util.UUID;
  * @since 2020/05/12
  */
 @Entity(name = "Use")
-@Table(name = "uses")
+@Table(name = "uses",
+    indexes = @Index(name = "idx_uses", columnList = "chip_id ASC, device_id ASC, measured_at ASC"))
 public class Use {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
