@@ -55,6 +55,7 @@ subprojects {
 
     dependencies {
       dependency 'commons-codec:commons-codec:1.14'
+      dependency 'org.apache.commons:commons-csv:1.8'
     }
   }
 
