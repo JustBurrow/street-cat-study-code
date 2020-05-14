@@ -12,6 +12,7 @@ import javax.annotation.PreDestroy;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.*;
+import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Future;
 
 import static java.nio.file.StandardWatchEventKinds.ENTRY_CREATE;
@@ -64,6 +65,11 @@ public class InputDirectoryMonitor {
               log.info("#monitor event : kind={}, file={}", event.kind(), file.getAbsolutePath());
 
               Future<BatchResult> result = this.service.process(file);
+              try {
+                log.info("#monitor result={}", result.get());
+              } catch (InterruptedException | ExecutionException e) {
+                log.warn("#monitor e=" + e.getMessage(), e);
+              }
             });
         key.reset();
       }
